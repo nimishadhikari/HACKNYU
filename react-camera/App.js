@@ -13,17 +13,11 @@ export default class CameraExample extends React.Component {
                 this.setState({ hasCameraPermission: status === 'granted' });
         }
 
-        takePicture = () => {
-                console.log(this.camera);
+        takePicture = async function() {
                 if(this.camera){
                         this.camera.takePictureAsync().then(data => {
-                                /*FileSystem.moveAsync({
-                                        from: data.uri,
-                                        to: `${FileSystem.documentDirectory}photos/Photo.jpg`,
-                                }).then(() => {
-                                        Vibration.vibrate();
-                                });*/
                                 Vibration.vibrate();
+                                console.log(data);
                         });
                 }
         };
