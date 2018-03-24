@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 import requests
 import json
 
@@ -45,8 +45,9 @@ def postImage():
     data = {}
     return jsonify(data)
 
-@app.route('/test')
+@app.route('/test', methods=['GET'])
 def test():
+    print("route test")
     return jsonify({'key': 'Value'})
 
 if __name__ == '__main__':
