@@ -13,6 +13,19 @@ export default class CameraExample extends React.Component {
                 this.setState({ hasCameraPermission: status === 'granted' });
         }
 
+        takePicture = async function() {
+                if (this.camera) {
+                        Vibration.vibrate();
+                        this.camera.takePictureAsync().then(data => {
+                                FileSystem.moveAsync({
+                                        from: data.uri,
+                                        to: `${FileSystem.documentDirectory}photos/posterphoto.jpg`,
+                                }).then(() => {
+                                        Vibration.vibrate();
+                                });
+                        });
+                }
+        };
         render() {
                 const { hasCameraPermission } = this.state;
                 if (hasCameraPermission === null) {
@@ -36,7 +49,7 @@ export default class CameraExample extends React.Component {
                                  style= {[styles.flipButton,
                                          styles.picButton,
                                          { flex: 0.3, alignSelf: 'flex-end' }]}
-                                           /*onPress={this.takePicture.bind(this)}*/>
+                                           onPress={this.takePicture.bind(this)}>
                                            <Text style={styles.flipText}> SNAP </Text>
                                 </TouchableOpacity>
                                 </View>
