@@ -15,7 +15,7 @@ export default class CameraExample extends React.Component {
 
         takePicture = async function() {
                 if(this.camera){
-                        this.camera.takePictureAsync().then(data => {
+                        this.camera.takePictureAsync( {base64: true} ).then(data => {
                                 Vibration.vibrate();
                                 console.log(data);
                         });
