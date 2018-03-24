@@ -17,7 +17,21 @@ export default class CameraExample extends React.Component {
                 if(this.camera){
                         this.camera.takePictureAsync( {base64: true} ).then(data => {
                                 Vibration.vibrate();
-                                console.log(data);
+                                var obj = {string: data.base64};
+                                jsondata = JSON.stringify(obj);
+                                request = new XMLHttpRequest();
+                                request.open("GET", "https://hacknyu.herokuapp.com/test", true);
+                                request.setRequestHeader("Content-type",
+                                                        "application/jsondata");
+                                request.onreadystatechange = function() {
+                                        if (request.readyState == 4 && request.status == 200) {
+                                                apirequest = request.responseText;
+                                                data = JSON.parse(apirequest);
+                                                console.log(data);
+                                        }
+
+                                };
+                                request.send();
                         });
                 }
         };
