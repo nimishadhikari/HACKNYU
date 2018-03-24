@@ -10,6 +10,11 @@ app = Flask(__name__)
 def index():
     return "Hello, World!"
 
+@app.route('/index')
+def index():
+    return "Hello, World!"
+
+
 @app.route('/postImage', methods=['POST'])
 def postImage():
     if not request.json:
